@@ -1,0 +1,7 @@
+#Position;ScrubName;DisplayName;StoredName;Type;Format;Parent
+1;dw_record_id;rowID;rowID;string;;
+2;dw_member_id;memberId;memberId;string;;
+3;rev_claim_id;claimNumber;claimNumber;string;;
+4;rev_claim_type;claimTypeId;claimTypeId;string;;
+5;svc_pos_code;placeOfService;placeOfService;string;;
+6;rev_paid_date;paidDate;paidDate;date;;

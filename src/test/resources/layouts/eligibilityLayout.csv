@@ -1,0 +1,10 @@
+#"Position";"ScrubName";"DisplayName";"StoredName";"Type";"Format";"Parent"
+1;"dw_record_id";"rowID";"rowID";"string";;
+2;"dw_member_id";"memberId";"memberId";"string";;
+3;"mbr_full_name";"memberFullName";"memberFullName";"string";;
+4;"mbr_gender";"memberGender";"memberGender";"string";;
+5;"mbr_dob";"memberDOB";"memberDOB";"date";;
+6;"ins_med_eff_date";"effectiveDate";"effectiveDate";"date";;
+7;"ins_med_term_date";"terminationDate";"terminationDate";"date";;
+8;"ins_rx_eff_date";"rxEffDate";"rxEffDate";"date";;
+9;"ins_rx_term_date";"rxTermDate";"rxTermDate";"date";;
