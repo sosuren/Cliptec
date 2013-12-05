@@ -9,5 +9,13 @@ package com.cliptec.constants;
  */
 public class DefaultConstants {
 
-    public static String LAYOUT_DEFAULT_DELIMETER = ";";
+    public static String DEFAULT_COMMENT_STROKE = "#";
+
+    //constants for handling layout entry files
+    public static String LAYOUT_ENTRY_DELIMETER = ";";
+    public static String LAYOUT_PATH_DELIMETER = ",";
+
+    //constant for handling input data files
+    public static String INPUT_ENTRY_DELIMETER = ";";
+    public static String INPUT_PATH_DELIMETER = ",";
 }

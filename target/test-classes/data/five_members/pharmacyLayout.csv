@@ -1,8 +1,0 @@
-#Position;ScrubName;DisplayName;StoredName;Type;Format;Parent
-1;dw_record_id;rowID;rowID;string;;
-2;dw_member_id;memberId;memberId;string;;
-3;"rev_transaction_num";"claimNumber";"claimNumber";"string";;
-4;"ins_plan_type_code";"planTypeId";"planTypeId";"string";;
-5;rev_paid_date;paidDate;paidDate;date;;
-6;"rev_paid_amt";"paidAmount";"paidAmount";"float";;
-7;"svc_code";"svcCode";"svcCode";"string";;

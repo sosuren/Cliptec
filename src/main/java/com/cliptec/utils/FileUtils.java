@@ -1,11 +1,11 @@
 package com.cliptec.utils;
 
-import com.cliptec.layout.api.LayoutParser;
-
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import com.cliptec.utils.parsers.api.Parser;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class FileUtils {
 
-    public static void readFile(String filePath, LayoutParser layoutParser){
+    public static void readFile(String filePath, Parser parser){
         try{
             FileReader fileReader = new FileReader(filePath);
             BufferedReader reader = new BufferedReader(fileReader);
@@ -24,7 +24,7 @@ public class FileUtils {
             String line;
 
             while((line = reader.readLine()) != null){
-                layoutParser.parseLine(line);
+                parser.parseLine(line);
             }
 
         } catch (FileNotFoundException e) {
@@ -33,10 +33,6 @@ public class FileUtils {
         catch(IOException e){
             e.printStackTrace();
         }
-    }
-
-    public interface Parser{
-        public void parserLine(String line);
     }
 
 }

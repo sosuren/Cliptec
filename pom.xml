@@ -248,7 +248,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.deerwalk.loader.App</mainClass>
+                            <mainClass>com.cliptec.loader.App</mainClass>
                         </manifest>
                     </archive>
 
@@ -264,7 +264,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.deerwalk.loader.App</mainClass>
+                            <mainClass>com.cliptec.loader.App</mainClass>
                         </manifest>
                         <manifestEntries>
                             <Class-Path>lib/elephant-bird-2.0.3.jar lib/mara.jar</Class-Path>
