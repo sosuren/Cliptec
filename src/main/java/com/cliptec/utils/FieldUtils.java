@@ -3,6 +3,7 @@ package com.cliptec.utils;
 import cascading.tuple.Fields;
 
 import com.cliptec.constants.DefaultConstants;
+import com.cliptec.constants.LayoutConstants;
 import com.cliptec.layout.LayoutEntry;
 import com.cliptec.layout.LayoutEntryList;
 import com.cliptec.utils.parsers.LayoutParser;
@@ -28,7 +29,7 @@ public class FieldUtils {
 
         parser = new LayoutParser();
 
-        for(String filePath: filePaths.split(DefaultConstants.LAYOUT_PATH_DELIMETER)){
+        for(String filePath: filePaths.split(LayoutConstants.LAYOUT_PATH_DELIMETER)){
             FileUtils.readFile(filePath, parser);
         }
 

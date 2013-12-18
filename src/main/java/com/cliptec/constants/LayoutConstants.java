@@ -11,4 +11,8 @@ public class LayoutConstants {
     public static String DW_MEMBER_ID = "dw_member_id";
     public static String MEMBER_DOB = "mbr_dob";
     public static String MEMBER_AGE = "mbr_age";
+
+    //constants for handling layout entry files
+    public static String LAYOUT_ENTRY_DELIMETER = ";";
+    public static String LAYOUT_PATH_DELIMETER = ",";
 }
