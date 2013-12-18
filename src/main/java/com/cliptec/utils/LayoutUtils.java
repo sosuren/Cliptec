@@ -1,5 +1,6 @@
 package com.cliptec.utils;
 
+import com.cliptec.constants.LayoutConstants;
 import com.cliptec.constants.LayoutEnum;
 import com.cliptec.constants.DefaultConstants;
 import com.cliptec.layout.LayoutEntry;
@@ -16,7 +17,7 @@ public class LayoutUtils {
     private String delim;
 
     public LayoutUtils(){
-        this.delim = DefaultConstants.LAYOUT_ENTRY_DELIMETER;
+        this.delim = LayoutConstants.LAYOUT_ENTRY_DELIMETER;
     }
 
     public LayoutUtils(String delim){
@@ -42,7 +43,7 @@ public class LayoutUtils {
     public LayoutEntry readEntry(String line){
 
         LayoutEntry entry = new LayoutEntry();
-        String[] entryArray = line.split(DefaultConstants.LAYOUT_ENTRY_DELIMETER, line.length());
+        String[] entryArray = line.split(LayoutConstants.LAYOUT_ENTRY_DELIMETER, line.length());
 
         entry.position = Integer.parseInt(StringUtils.trimWith(entryArray[LayoutEnum.POSITION.ordinal()].trim(), "\""));
         entry.scrubName = StringUtils.trimWith(entryArray[LayoutEnum.SCCRUBNAME.ordinal()].trim(), "\"");

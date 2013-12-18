@@ -40,7 +40,7 @@ public class AgeFunctionTest extends PlatformTestCase {
         FieldUtils utils = new FieldUtils();
         Fields inputFields = utils.getFieldsFromLayoutFiles(fileLoader.getFilePath(inputLayoutFile));
 
-        Tap inputTap = getPlatform().getDelimitedFile(inputFields, DefaultConstants.LAYOUT_ENTRY_DELIMETER, fileLoader.getFilePath(inputFileName));
+        Tap inputTap = getPlatform().getDelimitedFile(inputFields, LayoutConstants.LAYOUT_ENTRY_DELIMETER, fileLoader.getFilePath(inputFileName));
         //Tap outputTap = getPlatform().getDelimitedFile(Fields.UNKNOWN, getOutputPath(outputFileName), SinkMode.REPLACE);
         Tap outTap = getPlatform().getDelimitedFile(Fields.UNKNOWN,true,getOutputPath(inputFileName),SinkMode.REPLACE);
 
