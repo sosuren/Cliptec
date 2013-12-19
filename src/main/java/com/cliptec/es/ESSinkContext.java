@@ -83,6 +83,7 @@ public class ESSinkContext {
         this.endRecord();
     }
 
+
     public void endObject(){
         try {
             this.builder.endObject();
@@ -100,6 +101,7 @@ public class ESSinkContext {
             e.printStackTrace();
         }
     }
+
     public boolean cleanup() {
 
         BulkResponse response = (BulkResponse) this.request.execute().actionGet();
