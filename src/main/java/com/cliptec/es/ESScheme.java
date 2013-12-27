@@ -40,9 +40,11 @@ public class ESScheme extends Scheme<JobConf, RecordReader, OutputCollector, Obj
 
     @Override
     public void sinkConfInit(FlowProcess<JobConf> flowProcess, Tap<JobConf, RecordReader, OutputCollector> tap, JobConf conf) {
-        conf.set(DefaultConstants.CLUSTERNAME, "es_slama");
-        conf.set(DefaultConstants.INDEX_NAME, "cliptec");
-        conf.set(DefaultConstants.TYPE_NAME, "test");
+        conf.set(DefaultConstants.CLUSTER_NAME, "es_slama");
+        conf.set(DefaultConstants.ES_ADDR, "localhost");
+        conf.set(DefaultConstants.INDEX_NAME, "1009");
+        conf.set(DefaultConstants.TABLE_NAME, "cliptec");
+        conf.set(DefaultConstants.RUN_AS_TRANSPORT, "false");
     }
 
     @Override
@@ -58,7 +60,13 @@ public class ESScheme extends Scheme<JobConf, RecordReader, OutputCollector, Obj
     @Override
     public void sinkCleanup(FlowProcess<JobConf> flowProcess, SinkCall<ESSinkContext, OutputCollector> sinkCall) throws IOException{
         ESSinkContext context = sinkCall.getContext();
-        context.cleanup();
+        System.out.println("sink clean up is calling");
+        if(!context.cleanup()){
+            System.out.println("sink clean up unsuccessfull");
+        }
+        else{
+            System.out.println("sink clean up success");
+        }
         super.sinkCleanup(flowProcess, sinkCall);
     }
 }

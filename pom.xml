@@ -220,90 +220,17 @@
                     <optimize>true</optimize>
                 </configuration>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
-                            <overWriteIfNewer>true</overWriteIfNewer>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.cliptec.loader.App</mainClass>
-                        </manifest>
-                    </archive>
-
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.1</version>
                 <configuration>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
                             <mainClass>com.cliptec.loader.App</mainClass>
                         </manifest>
-                        <manifestEntries>
-                            <Class-Path>lib/elephant-bird-2.0.3.jar lib/mara.jar</Class-Path>
-                        </manifestEntries>
                     </archive>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>generate-sources</id>
-                        <phase>generate-sources</phase>
-                        <configuration>
-                            <tasks>
-                                <mkdir dir="target/generated-sources"/>
-                                <exec executable="protoc">
-                                    <arg value="--java_out=src/main/java/"/>
-                                    <arg value="src/main/proto/Member_analytics.proto"/>
-                                    <arg value="src/main/proto/MARA.proto"></arg>
-                                    <arg value="src/main/proto/Member_Attribution.proto"></arg>
-                                    <arg value="src/main/proto/CCE_patientsearch.proto"></arg>
-                                    <arg value="src/main/proto/MemberHRABiometric.proto"></arg>
-                                    <arg value="src/main/proto/DUPLICATE_CLAIMS.proto"></arg>
-                                    <arg value="src/main/proto/MemberProfile.proto"></arg>
-                                    <arg value="src/main/proto/WorkersCompensations.proto"></arg>
-                                    <arg value="src/main/proto/ConditionalSaving.proto"></arg>
-
-                                </exec>
-                            </tasks>
-                            <sourceRoot>src/main/java/</sourceRoot>
-                        </configuration>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
         </plugins>
     </build>
 

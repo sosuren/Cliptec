@@ -7,6 +7,7 @@ import org.elasticsearch.action.ActionRequestBuilder;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.client.Requests;
+import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.node.Node;
 import static org.elasticsearch.node.NodeBuilder.*;
 import org.elasticsearch.client.Client;
@@ -25,22 +26,34 @@ import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
  */
 public class ESSinkContext {
     public String clusterName = null;
+    public String esAddress = null;
     public String indexName = null;
-    public String typeName = null;
+    public String tableName = null;
 
     public Node node;
     public Client client;
 
     protected ActionRequestBuilder request;
-    public XContentBuilder builder;
+    public XContentBuilder jsonBuilder;
 
     public void setUp(JobConf conf){
 
 //        this.clusterName = conf.get()
-        this.clusterName = conf.get(DefaultConstants.CLUSTERNAME);
+        this.clusterName = conf.get(DefaultConstants.CLUSTER_NAME);
+        System.out.println("Cluster Name::: " + this.clusterName);
+        this.esAddress = conf.get(DefaultConstants.ES_ADDR);
+        System.out.println("ES Address::::" + this.esAddress);
         this.indexName = conf.get(DefaultConstants.INDEX_NAME);
-        this.typeName = conf.get(DefaultConstants.TYPE_NAME);
+        System.out.println("Index Name::: " + this.indexName);
+        this.tableName = conf.get(DefaultConstants.TABLE_NAME);
+        System.out.println("Table Name:::: " + this.tableName);
 
+        ImmutableSettings.Builder builder = ImmutableSettings.settingsBuilder();
+        builder.put("cluster.name", this.clusterName);
+        builder.put("discovery.zen.multicast.enabled", false);
+        builder.putArray("discovery.zen.ping.unicast.hosts", this.esAddress);//host 1, host2 external EC2 DNS
+        builder.put("node.local", "true");
+        builder.put("transport.tcp.connect_timeout", "1200s");
 
         this.node = nodeBuilder().local(true).clusterName(this.clusterName).node();
         this.client = this.node.client();
@@ -51,8 +64,8 @@ public class ESSinkContext {
 
     public void startRecord(){
         try {
-            this.builder = jsonBuilder();
-            this.builder.startObject();
+            this.jsonBuilder = jsonBuilder();
+            this.jsonBuilder.startObject();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -60,7 +73,7 @@ public class ESSinkContext {
 
     public void startObject(){
         try {
-            this.builder.startObject();
+            this.jsonBuilder.startObject();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,7 +81,7 @@ public class ESSinkContext {
 
     public void processColumn(String columnName, Object data){
         try {
-            this.builder.field(columnName, data);
+            this.jsonBuilder.field(columnName, data);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,14 +92,14 @@ public class ESSinkContext {
         String dw_member_id = entry.getString(LayoutConstants.DW_MEMBER_ID);
         this.processColumn(LayoutConstants.DW_MEMBER_ID, dw_member_id);
         int age = entry.getInteger(LayoutConstants.MEMBER_AGE);
-        this.processColumn(LayoutConstants.DW_MEMBER_ID, age);
+        this.processColumn(LayoutConstants.MEMBER_AGE, age);
         this.endRecord();
     }
 
 
     public void endObject(){
         try {
-            this.builder.endObject();
+            this.jsonBuilder.endObject();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -94,8 +107,8 @@ public class ESSinkContext {
 
     public void endRecord(){
         try {
-            this.builder.endObject();
-            ((BulkRequestBuilder) request).add(Requests.indexRequest(DefaultConstants.INDEX_NAME).type(DefaultConstants.TYPE_NAME).id("s").create(false).source(this.builder));
+            this.jsonBuilder.endObject();
+            ((BulkRequestBuilder) request).add(Requests.indexRequest(this.indexName).type(this.tableName).id("s").create(false).source(this.jsonBuilder));
 
         } catch (IOException e) {
             e.printStackTrace();

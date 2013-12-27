@@ -11,7 +11,9 @@ public class DefaultConstants {
 
     public static String DEFAULT_COMMENT_STROKE = "#";
 
-    public static String CLUSTERNAME = "CLUSTERNAME";
-    public static String INDEX_NAME = "INDEXNAME";
-    public static String TYPE_NAME = "TYPENAME";
+    public static String CLUSTER_NAME = "cluster_name";
+    public static String ES_ADDR = "es_addr";
+    public static String RUN_AS_TRANSPORT = "run_as_transport";
+    public static String INDEX_NAME = "index_name";
+    public static String TABLE_NAME = "TABLE_NAME";
 }
